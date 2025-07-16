@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../useHook/useAuth";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -9,6 +9,7 @@ const JobDetails = () => {
   const job = useLoaderData();
   const [startDate, setStartDate] = useState(new Date());
   const [priceError, setPriceError] = useState(false);
+  const navigate = useNavigate();
   const { user } = useAuth();
   const {
     deadline,
@@ -58,6 +59,7 @@ const JobDetails = () => {
       toast.success("Place Bid Successfully!!!");
       console.log(res.data);
       form.reset();
+      navigate("/my-bids");
     } catch (error) {
       console.error(error);
     }
